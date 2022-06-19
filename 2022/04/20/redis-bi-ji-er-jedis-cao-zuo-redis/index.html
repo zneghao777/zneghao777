@@ -4,22 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="算法刷题, 曾豪的博客">
-    <meta name="description" content="两个数组的交集(350)题目分析我们先来看一道题目：
-
-
-
-第350题：两个数组的交集
-
-
-
-给定两个数组，编写一个函数来计算它们的交集。
-
-
-示例 1:
-输入: nums1 = [1,2,2,1], nums2 = [2,2]
-
-输出: ">
+    <meta name="keywords" content="Redis笔记(二), 曾豪的博客">
+    <meta name="description" content="Jedsi操作Redis">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -33,7 +19,7 @@
 
     
 
-    <title>算法刷题 | 曾豪的博客</title>
+    <title>Redis笔记(二) | 曾豪的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -372,12 +358,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">算法刷题</h1>
+                    <h1 class="description center-align post-title">Redis笔记(二)</h1>
                 </div>
             </div>
         </div>
@@ -493,12 +479,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Typora/">
-                                <span class="chip bg-color">Typora</span>
+                            <a href="/tags/redis/">
+                                <span class="chip bg-color">redis</span>
                             </a>
                         
-                            <a href="/tags/%E7%AE%97%E6%B3%95/">
-                                <span class="chip bg-color">算法</span>
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                                <span class="chip bg-color">数据库</span>
                             </a>
                         
                     </div>
@@ -509,8 +495,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%88%B7%E9%A2%98/" class="post-category">
-                                刷题
+                            <a href="/categories/%E7%AC%94%E8%AE%B0/" class="post-category">
+                                笔记
                             </a>
                         
                     </div>
@@ -522,21 +508,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-06-02
+                    2022-04-20
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-06-17
+                    2022-06-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    880
+                    745
                 </div>
                 
 
@@ -566,139 +552,191 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="两个数组的交集-350"><a href="#两个数组的交集-350" class="headerlink" title="两个数组的交集(350)"></a>两个数组的交集(350)</h2><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>我们先来看一道题目：</p>
-<table>
-<thead>
-<tr>
-<th>第350题：两个数组的交集</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>给定两个数组，编写一个函数来计算它们的交集。</td>
-</tr>
-</tbody></table>
-<p><strong>示例 1:</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">输入: nums1 = [1,2,2,1], nums2 = [2,2]
+                <h3 id="Jedsi操作Redis"><a href="#Jedsi操作Redis" class="headerlink" title="Jedsi操作Redis"></a>Jedsi操作Redis</h3><p> 常用操作</p>
+<h4 id="jedis所需的依赖"><a href="#jedis所需的依赖" class="headerlink" title="jedis所需的依赖"></a>jedis所需的依赖</h4><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>redis.clients<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>jedis<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>3.3.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-输出: [2,2]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="连接Redis的注意事项"><a href="#连接Redis的注意事项" class="headerlink" title="连接Redis的注意事项"></a>连接Redis的注意事项</h4><p>禁用Linux的防火墙：Linux(CentOS7)里执行命令</p>
+<pre class="line-numbers language-none"><code class="language-none">systemctl stop/disable firewalld.service<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><strong>示例 2:</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+<p>redis.conf中注释掉bind 127.0.0.1 ,然后 protected-mode no<br>测试程序</p>
+<pre class="line-numbers language-none"><code class="language-none">public class JedisDemo1 {
+public static void main(String[] args) {
+    //创建Jedis对象
+    Jedis jedis = new Jedis("192.168.242.110", 6379);
+    //测试
+    String ping = jedis.ping();
+    System.out.println(ping);
+}
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-输出: [4,9]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="测试相关数据类型"><a href="#测试相关数据类型" class="headerlink" title="测试相关数据类型"></a>测试相关数据类型</h4><h5 id="操作Key和String"><a href="#操作Key和String" class="headerlink" title="操作Key和String"></a>操作Key和String</h5><pre class="line-numbers language-none"><code class="language-none">//操作key string
+@Test
+public void demo1() {
+    //创建Jedis对象
+    Jedis jedis = new Jedis("192.168.242.110", 6379);        //添加
+    jedis.set("name","lucy");
 
-<p>说明：</p>
-<ul>
-<li>输出结果中每个元素出现的次数，应与元素在两个数组中出现的次数一致。</li>
-<li>我们可以不考虑输出结果的顺序。</li>
-</ul>
-<p>进阶:  </p>
-<ul>
-<li>如果给定的数组已经排好序呢？将如何优化你的算法呢？</li>
-</ul>
-<p>思路：设定两个为0的指针，比较两个指针的元素是否相等。如果指针的元素相等，我们将两个指针一起向后移动，并且将相等的元素放入空白数组。</p>
-<h2 id="最长公共前缀-14"><a href="#最长公共前缀-14" class="headerlink" title="最长公共前缀(14)"></a>最长公共前缀(14)</h2><h2 id="题目分析-1"><a href="#题目分析-1" class="headerlink" title="题目分析"></a>题目分析</h2><p>首先还是看下题目：</p>
-<table>
-<thead>
-<tr>
-<th>题目14: 最长公共前缀</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>编写一个函数来查找字符串数组中的最长公共前缀。如果不存在公共前缀，则返回””</td>
-</tr>
-</tbody></table>
-<p><strong>示例1:</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">输入: ["flower","flow","flight"]
-输出: "fl"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+//获取
+String name = jedis.get("name");
+System.out.println(name);
 
-<p><strong>示例 2:</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">输入: ["dog","racecar","car"]
-输出: ""<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+//设置多个key-value
+jedis.mset("k1","v1","k2","v2");
+List&lt;String&gt; mget = jedis.mget("k1", "k2");
+System.out.println(mget);
 
-<p>解释: </p>
-<ul>
-<li>输入不存在公共前缀。</li>
-</ul>
-<p>说明：</p>
-<ul>
-<li>所有输入只包含小写字母 a-z </li>
-</ul>
-<h2 id="旋转数组-189"><a href="#旋转数组-189" class="headerlink" title="旋转数组(189)"></a>旋转数组(189)</h2><h2 id="题目分析-2"><a href="#题目分析-2" class="headerlink" title="题目分析"></a>题目分析</h2><table>
-<thead>
-<tr>
-<th>题目189: 旋转数组</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。</td>
-</tr>
-</tbody></table>
-<p><strong>示例 1:</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">输入: [1,2,3,4,5,6,7] 和 k = 3
-输出: [5,6,7,1,2,3,4]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+Set&lt;String&gt; keys = jedis.keys("*");
+for(String key : keys) {
+    System.out.println(key);
+}
+jedis.close();
 
-<p>解释:</p>
-<ul>
-<li>向右旋转 1 步: [7,1,2,3,4,5,6]</li>
-<li>向右旋转 2 步: [6,7,1,2,3,4,5]</li>
-<li>向右旋转 3 步: [5,6,7,1,2,3,4]</li>
-</ul>
-<p><strong>示例 2:</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">输入: [-1,-100,3,99] 和 k = 2
-输出: [3,99,-1,-100]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>解释: </p>
-<ul>
-<li>向右旋转 1 步: [99,-1,-100,3]</li>
-<li>向右旋转 2 步: [3,99,-1,-100]</li>
-</ul>
-<p>说明:</p>
-<p>尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。</p>
-<p><strong>要求使用空间复杂度为 O(1) 的 原地 算法。</strong></p>
-<br>
+<h5 id="操作list"><a href="#操作list" class="headerlink" title="操作list"></a>操作list</h5><pre class="line-numbers language-none"><code class="language-none">//操作list
+@Test
+public void demo2() {
+    //创建Jedis对象
+    Jedis jedis = new Jedis("192.168.242.110", 6379);
+    jedis.lpush("key1","lucy","mary","jack");
+    List&lt;String&gt; values = jedis.lrange("key1", 0, -1);
+    System.out.println(values);
+    jedis.close();
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<blockquote>
-<p>这道题如果不要求原地翻转的话，其实相当简单。但是原地翻转的方法却并不容易想到，我们直接看题解。</p>
-</blockquote>
-<h2 id="加一-66"><a href="#加一-66" class="headerlink" title="加一(66)"></a>加一(66)</h2><blockquote>
-<p>看到这个标题，大家肯定会觉得，不就是“加1”嘛，这么简单的问题我可以！但是就是这么简单的“加1”可是面试的高频题哦，所以我们就一起来看看吧。按照往例，我们还是从一道LeetCode题开始吧。</p>
-</blockquote>
-<h2 id="题目分析-3"><a href="#题目分析-3" class="headerlink" title="题目分析"></a>题目分析</h2><table>
-<thead>
-<tr>
-<th>第66题：加一</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。</td>
-</tr>
-</tbody></table>
-<p>最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
-<p><strong>示例 1:</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">输入: [1,2,3]
-输出: [1,2,4]
-解释: 输入数组表示数字 123。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h5 id="操作set"><a href="#操作set" class="headerlink" title="操作set"></a>操作set</h5><pre class="line-numbers language-none"><code class="language-none">//操作set
+@Test
+public void demo3() {
+    //创建Jedis对象
+    Jedis jedis = new Jedis("192.168.242.110", 6379);
+    jedis.sadd("names","lucy");
+    jedis.sadd("names","mary");
 
-<p><strong>示例 2:</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">输入: [4,3,2,1]
-输出: [4,3,2,2]
-解释: 输入数组表示数字 4321。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+    Set&lt;String&gt; names = jedis.smembers("names");
+    System.out.println(names);
+    jedis.close();
 
-<br>
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<blockquote>
-<p>题目分析：</p>
-</blockquote>
-<p>根据题目，我们需要加一！没错，加一很重要。因为它只是加一，所以我们会考虑到两种情况：</p>
-<ul>
-<li><p><strong>普通情况，除9之外的数字加1。</strong></p>
-</li>
-<li><p><strong>特殊情况，9加1。（因为9加1需要进位）</strong></p>
-</li>
-</ul>
-<p>所以我们只需要模拟这两种运算，就可以顺利进行求解！</p>
-<p><strong>未完待续…</strong></p>
+
+
+<h5 id="操作hash"><a href="#操作hash" class="headerlink" title="操作hash"></a>操作hash</h5><pre class="line-numbers language-none"><code class="language-none">//操作hash
+@Test
+public void demo4() {
+    //创建Jedis对象
+    Jedis jedis = new Jedis("192.168.242.110", 6379);
+    jedis.hset("users","age","20");
+    String hget = jedis.hget("users", "age");
+    System.out.println(hget);
+    jedis.close();
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="操作zset"><a href="#操作zset" class="headerlink" title="操作zset"></a>操作zset</h5><pre class="line-numbers language-none"><code class="language-none">//操作zset
+@Test
+public void demo5() {
+    //创建Jedis对象
+    Jedis jedis = new Jedis("192.168.242.110", 6379);
+    jedis.zadd("china",100d,"shanghai");
+
+    Set&lt;String&gt; china = jedis.zrange("china", 0, -1);
+    System.out.println(china);
+    
+    jedis.close();
+
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="小实战-手机验证码"><a href="#小实战-手机验证码" class="headerlink" title="小实战(手机验证码)"></a>小实战(手机验证码)</h4><p>要求:</p>
+<p>1、输入手机号，点击发送后随机生成6位数字码，2分钟有效</p>
+<p>2、输入验证码，点击验证，返回成功或失败</p>
+<p>3、每个手机号每天只能输入3次</p>
+<pre class="line-numbers language-none"><code class="language-none">
+public class PhoneCode {
+public static void main(String[] args) {
+    //模拟验证码发送
+    verifyCode("15970387607");
+
+//模拟验证码校验
+//getRedisCode("15970387607","698264");
+
+}
+
+/**
+
+ * 1、生成六位数字验证码
+ * @return
+   */
+   public static String getCode(){
+   Random random = new Random();
+   String code = "";
+   for(int i = 0;i&lt;6;i++){
+       int index = random.nextInt(10);
+       code += index;
+   }
+   return code;
+   }
+
+/**
+
+ * 2、每个手机每天只能发送三次，验证码放到redis中，设置过期时间120
+
+ * @param phone
+   */
+   public static void verifyCode(String phone) {
+   //创建Jedis对象 连接Redis
+   Jedis jedis = new Jedis("192.168.242.110", 6379);
+
+   //拼接key
+   //手机发送次数key
+   String countKey = "VerifyCode"+phone+":count";
+   //验证码key
+   String codeKey = "VerifyCode"+phone+":code";
+
+   String count = jedis.get(countKey);
+   if(count == null){
+       //没有发送次数，第一次发送
+       //设置发送次数是1
+       jedis.setex(countKey,24*60*60,"1");
+   }else if(Integer.parseInt(count) &lt;= 2){
+       //发送次数+1
+       jedis.incr(countKey);
+   }else{
+       System.out.println("今天发送次数已经超过三次");
+       jedis.close();
+       return;
+   }
+
+   //发送验证码放到redis里面
+   String vcode = getCode();
+   jedis.setex(codeKey,120,vcode);
+   jedis.close();
+
+}
+
+public static void getRedisCode(String phone,String code) {
+    //从redis获取验证码
+    Jedis jedis = new Jedis("192.168.242.110", 6379);
+    //验证码key
+    String codeKey = "VerifyCode"+phone+":code";
+    String redisCode = jedis.get(codeKey);
+    //判断
+    if(redisCode.equals(code)) {
+        System.out.println("成功");
+    }else {
+        System.out.println("失败");
+    }
+    jedis.close();
+}
+
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
@@ -715,7 +753,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">曾豪</a>
+                    <a href="/about" rel="external nofollow noreferrer">zenghao</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -725,7 +763,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2022/06/02/suan-fa-shua-ti-ji-hua/">http://example.com/2022/06/02/suan-fa-shua-ti-ji-hua/</a>
+                    <a href="http://example.com/2022/04/20/redis-bi-ji-er-jedis-cao-zuo-redis/">http://example.com/2022/04/20/redis-bi-ji-er-jedis-cao-zuo-redis/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -738,7 +776,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">曾豪</a>
+                    <a href="/about" target="_blank">zenghao</a>
                     !
                 </span>
             </div>
@@ -763,12 +801,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Typora/">
-                                    <span class="chip bg-color">Typora</span>
+                                <a href="/tags/redis/">
+                                    <span class="chip bg-color">redis</span>
                                 </a>
                             
-                                <a href="/tags/%E7%AE%97%E6%B3%95/">
-                                    <span class="chip bg-color">算法</span>
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                                    <span class="chip bg-color">数据库</span>
                                 </a>
                             
                         </div>
@@ -1213,13 +1251,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/06/16/wo-de-bo-ke/">
+                <a href="/2022/06/02/suan-fa-shua-ti-ji-hua/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="测试文章">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="算法刷题">
                         
-                        <span class="card-title">测试文章</span>
+                        <span class="card-title">算法刷题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1230,12 +1268,16 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-06-16
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-06-02
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            zenghao
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%88%B7%E9%A2%98/" class="post-category">
+                                    刷题
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -1243,8 +1285,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%97%A5%E5%B8%B8/">
-                        <span class="chip bg-color">日常</span>
+                    <a href="/tags/Typora/">
+                        <span class="chip bg-color">Typora</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">算法</span>
                     </a>
                     
                 </div>
@@ -1258,24 +1304,24 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/04/20/redis-bi-ji-er-jedis-cao-zuo-redis/">
+                <a href="/2022/04/19/redis-pei-zhi-wen-jian-gai-shu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Redis笔记(二)">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="Redis配置文件概述">
                         
-                        <span class="card-title">Redis笔记(二)</span>
+                        <span class="card-title">Redis配置文件概述</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Jedsi操作Redis
+                            
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-19
                             </span>
                         <span class="publish-author">
                             
